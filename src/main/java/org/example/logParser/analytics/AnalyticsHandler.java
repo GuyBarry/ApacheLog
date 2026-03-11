@@ -8,12 +8,14 @@ public class AnalyticsHandler implements Analytics {
   private final Map<String, Integer> browserCount;
   private final Map<String, Integer> OSCount;
   private int totalLogs;
+  private int errorLogs;
 
   public AnalyticsHandler() {
     countryCount = new HashMap<>();
     browserCount = new HashMap<>();
     OSCount = new HashMap<>();
     totalLogs = 0;
+    errorLogs = 0;
   }
 
   @Override
@@ -34,5 +36,10 @@ public class AnalyticsHandler implements Analytics {
   @Override
   public void setTotalLogs(int totalLogs) {
     this.totalLogs = totalLogs;
+  }
+
+  @Override
+  public void addErrorLog() {
+    errorLogs++;
   }
 }

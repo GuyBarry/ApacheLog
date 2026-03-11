@@ -8,4 +8,5 @@ public interface Analytics {
   void addCountry(String country);
 
   void setTotalLogs(int totalLogs);
+  void addErrorLog();
 }
