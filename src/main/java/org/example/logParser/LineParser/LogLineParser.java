@@ -1,3 +1,5 @@
 package org.example.logParser.LineParser;
 
-public interface LogLineParser {}
+public interface LogLineParser {
+    LogLineData getLogLineData(String logLine);
+}
