@@ -14,7 +14,7 @@ public class UserAgentService implements UserAgentHandler {
   @Override
   public UserAgentData parse(String rawUserAgent) {
     if (rawUserAgent == null || rawUserAgent.isBlank()) {
-      return new UserAgentData("", "");
+      return new UserAgentData("Unknown", "Unknown");
     }
 
     UserAgent agent = analyzer.parse(rawUserAgent);

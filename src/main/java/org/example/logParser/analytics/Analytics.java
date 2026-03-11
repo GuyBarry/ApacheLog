@@ -1,5 +1,7 @@
 package org.example.logParser.analytics;
 
+import java.util.Map;
+
 public interface Analytics {
   void addOS(String os);
 
@@ -7,6 +9,9 @@ public interface Analytics {
 
   void addCountry(String country);
 
-  void setTotalLogs(int totalLogs);
   void addErrorLog();
+
+  Map<String, Double> getBrowserPercentages();
+  Map<String, Double> getCountryPercentages();
+  Map<String, Double> getOSPercentages();
 }

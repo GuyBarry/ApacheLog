@@ -2,19 +2,18 @@ package org.example.logParser.analytics;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AnalyticsHandler implements Analytics {
   private final Map<String, Integer> countryCount;
   private final Map<String, Integer> browserCount;
   private final Map<String, Integer> OSCount;
-  private int totalLogs;
   private int errorLogs;
 
   public AnalyticsHandler() {
     countryCount = new HashMap<>();
     browserCount = new HashMap<>();
     OSCount = new HashMap<>();
-    totalLogs = 0;
     errorLogs = 0;
   }
 
@@ -34,12 +33,32 @@ public class AnalyticsHandler implements Analytics {
   }
 
   @Override
-  public void setTotalLogs(int totalLogs) {
-    this.totalLogs = totalLogs;
+  public void addErrorLog() {
+    errorLogs++;
   }
 
   @Override
-  public void addErrorLog() {
-    errorLogs++;
+  public Map<String, Double> getBrowserPercentages() {
+    return toPercentages(browserCount);
+  }
+
+  @Override
+  public Map<String, Double> getCountryPercentages() {
+    return toPercentages(countryCount);
+  }
+
+  @Override
+  public Map<String, Double> getOSPercentages() {
+    return toPercentages(OSCount);
+  }
+
+  private Map<String, Double> toPercentages(Map<String, Integer> countMap) {
+    int total = countMap.values().stream().mapToInt(Integer::intValue).sum();
+    if (total == 0) return new HashMap<>();
+    return countMap.entrySet().stream()
+        .collect(Collectors.toMap(
+            Map.Entry::getKey,
+            e -> Math.round((e.getValue() * 100.0 / total) * 100.0) / 100.0
+        ));
   }
 }

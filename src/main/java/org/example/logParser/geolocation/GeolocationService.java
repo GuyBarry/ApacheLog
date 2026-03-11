@@ -32,7 +32,7 @@ public class GeolocationService implements Geolocation {
       CountryResponse response = databaseReader.country(inetAddress);
       return response.getCountry().getName();
     } catch (IOException | GeoIp2Exception e) {
-      return "";
+      return "Other";
     }
   }
 }
