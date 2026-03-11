@@ -1,6 +1,3 @@
 package org.example.logParser.LineParser;
 
-public interface LogLineData {
-    String getIpAddress();
-    String getUserAgent();
-}
+public record LogLineData(String ipAddress, String userAgent) {}
